@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from guardian.admin import GuardedModelAdmin
 from import_export.admin import ImportExportModelAdmin
@@ -10,7 +13,7 @@ from unfold.contrib.filters.admin import (
     RelatedDropdownFilter,
 )
 from unfold.contrib.import_export.forms import ExportForm, ImportForm
-from unfold.decorators import display
+from unfold.decorators import action, display
 
 from .models import (
     AllowanceType,
@@ -295,6 +298,114 @@ class PayrollPeriodAdmin(ModelAdmin):
     )
     def display_status(self, instance):
         return instance.get_status_display()
+
+    @action(description=_("Calculate Payroll"))
+    def calculate_payroll_action(self, request, object_id):
+        """Calculate payroll for this period."""
+        from payroll.services.payroll_calculator import PayrollCalculator
+
+        period = self.get_object(request, object_id)
+
+        # Check if already calculating or beyond
+        if period.status != PayrollPeriodStatus.DRAFT:
+            messages.warning(
+                request,
+                _("Payroll period must be in DRAFT status to calculate."),
+            )
+            return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+        try:
+            # Start calculation
+            period.start_calculation()
+            period.save()
+
+            # Calculate payroll
+            calculator = PayrollCalculator(period)
+            payslips = calculator.calculate_all_employees()
+
+            # Submit for approval
+            period.submit_for_approval()
+            period.save()
+
+            messages.success(
+                request,
+                _(f"Successfully calculated payroll for {len(payslips)} employees."),
+            )
+        except Exception as e:
+            messages.error(request, _(f"Error calculating payroll: {e}"))
+
+        return HttpResponseRedirect(
+            reverse(
+                "admin:payroll_payrollperiod_change",
+                args=[object_id],
+            )
+        )
+
+    @action(description=_("Approve Payroll"))
+    def approve_action(self, request, object_id):
+        """Approve payroll period."""
+        period = self.get_object(request, object_id)
+
+        if period.status != PayrollPeriodStatus.PENDING_APPROVAL:
+            messages.warning(
+                request,
+                _("Payroll period must be in PENDING_APPROVAL status to approve."),
+            )
+            return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+        try:
+            period.approve()
+            # Set approver to current user's employee
+            if hasattr(request.user, "employee"):
+                period.approved_by = request.user.employee
+            period.save()
+
+            messages.success(request, _("Payroll period approved successfully."))
+        except Exception as e:
+            messages.error(request, _(f"Error approving payroll: {e}"))
+
+        return HttpResponseRedirect(
+            reverse(
+                "admin:payroll_payrollperiod_change",
+                args=[object_id],
+            )
+        )
+
+    @action(description=_("Mark as Paid"))
+    def mark_as_paid_action(self, request, object_id):
+        """Mark payroll period as paid."""
+        period = self.get_object(request, object_id)
+
+        if period.status != PayrollPeriodStatus.APPROVED:
+            messages.warning(
+                request,
+                _("Payroll period must be in APPROVED status to mark as paid."),
+            )
+            return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+        try:
+            period.mark_as_paid()
+            period.save()
+
+            # Update all payslips to PAID status
+            period.payslips.update(status=PayslipStatus.PAID)
+
+            messages.success(request, _("Payroll period marked as paid."))
+        except Exception as e:
+            messages.error(request, _(f"Error marking as paid: {e}"))
+
+        return HttpResponseRedirect(
+            reverse(
+                "admin:payroll_payrollperiod_change",
+                args=[object_id],
+            )
+        )
+
+    actions_row = [
+        "calculate_payroll_action",
+        "approve_action",
+        "mark_as_paid_action",
+    ]
 
 
 @admin.register(SalaryContract)
