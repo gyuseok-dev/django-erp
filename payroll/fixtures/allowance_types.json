@@ -1,0 +1,110 @@
+[
+  {
+    "model": "payroll.allowancetype",
+    "pk": 1,
+    "fields": {
+      "name": "식대",
+      "code": "MEAL",
+      "calculation_type": "FIXED",
+      "default_amount": 100000,
+      "default_amount_currency": "KRW",
+      "default_percentage": "0.00",
+      "is_taxable": false,
+      "description": "월 식대 지원",
+      "is_active": true,
+      "display_order": 1,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.allowancetype",
+    "pk": 2,
+    "fields": {
+      "name": "교통비",
+      "code": "TRANSPORT",
+      "calculation_type": "FIXED",
+      "default_amount": 100000,
+      "default_amount_currency": "KRW",
+      "default_percentage": "0.00",
+      "is_taxable": false,
+      "description": "월 교통비 지원",
+      "is_active": true,
+      "display_order": 2,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.allowancetype",
+    "pk": 3,
+    "fields": {
+      "name": "직책수당",
+      "code": "POSITION",
+      "calculation_type": "FIXED",
+      "default_amount": 0,
+      "default_amount_currency": "KRW",
+      "default_percentage": "0.00",
+      "is_taxable": true,
+      "description": "직책에 따른 수당 (JobPosition에서 관리)",
+      "is_active": true,
+      "display_order": 3,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.allowancetype",
+    "pk": 4,
+    "fields": {
+      "name": "초과근무수당",
+      "code": "OVERTIME",
+      "calculation_type": "HOURLY",
+      "default_amount": 0,
+      "default_amount_currency": "KRW",
+      "default_percentage": "0.00",
+      "is_taxable": true,
+      "description": "평일 초과근무 수당 (시간당 기본급의 1.5배)",
+      "is_active": true,
+      "display_order": 4,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.allowancetype",
+    "pk": 5,
+    "fields": {
+      "name": "야간근무수당",
+      "code": "NIGHT",
+      "calculation_type": "HOURLY",
+      "default_amount": 0,
+      "default_amount_currency": "KRW",
+      "default_percentage": "0.00",
+      "is_taxable": true,
+      "description": "야간근무 수당 (시간당 기본급의 1.5배)",
+      "is_active": true,
+      "display_order": 5,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.allowancetype",
+    "pk": 6,
+    "fields": {
+      "name": "휴일근무수당",
+      "code": "HOLIDAY",
+      "calculation_type": "HOURLY",
+      "default_amount": 0,
+      "default_amount_currency": "KRW",
+      "default_percentage": "0.00",
+      "is_taxable": true,
+      "description": "휴일근무 수당 (시간당 기본급의 2.0배)",
+      "is_active": true,
+      "display_order": 6,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  }
+]

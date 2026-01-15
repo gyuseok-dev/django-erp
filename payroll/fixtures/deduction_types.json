@@ -1,0 +1,122 @@
+[
+  {
+    "model": "payroll.deductiontype",
+    "pk": 1,
+    "fields": {
+      "name": "국민연금",
+      "code": "PENSION",
+      "calculation_type": "PERCENTAGE",
+      "default_rate": "0.0450",
+      "employer_rate": "0.0450",
+      "min_amount": null,
+      "min_amount_currency": "KRW",
+      "max_amount": 248850,
+      "max_amount_currency": "KRW",
+      "is_statutory": true,
+      "description": "국민연금 (기준소득월액의 4.5%, 상한액 248,850원)",
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.deductiontype",
+    "pk": 2,
+    "fields": {
+      "name": "건강보험",
+      "code": "HEALTH",
+      "calculation_type": "PERCENTAGE",
+      "default_rate": "0.03545",
+      "employer_rate": "0.03545",
+      "min_amount": null,
+      "min_amount_currency": "KRW",
+      "max_amount": null,
+      "max_amount_currency": "KRW",
+      "is_statutory": true,
+      "description": "건강보험 (기준소득월액의 3.545%, 노사 각 50%)",
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.deductiontype",
+    "pk": 3,
+    "fields": {
+      "name": "장기요양보험",
+      "code": "LONG_TERM_CARE",
+      "calculation_type": "PERCENTAGE",
+      "default_rate": "0.1295",
+      "employer_rate": "0.1295",
+      "min_amount": null,
+      "min_amount_currency": "KRW",
+      "max_amount": null,
+      "max_amount_currency": "KRW",
+      "is_statutory": true,
+      "description": "장기요양보험 (건강보험료의 12.95%)",
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.deductiontype",
+    "pk": 4,
+    "fields": {
+      "name": "고용보험",
+      "code": "EMPLOYMENT",
+      "calculation_type": "PERCENTAGE",
+      "default_rate": "0.0090",
+      "employer_rate": "0.0090",
+      "min_amount": null,
+      "min_amount_currency": "KRW",
+      "max_amount": null,
+      "max_amount_currency": "KRW",
+      "is_statutory": true,
+      "description": "고용보험 (기준소득월액의 0.9%)",
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.deductiontype",
+    "pk": 5,
+    "fields": {
+      "name": "소득세",
+      "code": "INCOME_TAX",
+      "calculation_type": "FORMULA",
+      "default_rate": "0.0000",
+      "employer_rate": "0.0000",
+      "min_amount": null,
+      "min_amount_currency": "KRW",
+      "max_amount": null,
+      "max_amount_currency": "KRW",
+      "is_statutory": true,
+      "description": "근로소득세 (간이세액표 적용)",
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "payroll.deductiontype",
+    "pk": 6,
+    "fields": {
+      "name": "주민세",
+      "code": "RESIDENT_TAX",
+      "calculation_type": "PERCENTAGE",
+      "default_rate": "0.1000",
+      "employer_rate": "0.0000",
+      "min_amount": null,
+      "min_amount_currency": "KRW",
+      "max_amount": null,
+      "max_amount_currency": "KRW",
+      "is_statutory": true,
+      "description": "지방소득세 (소득세의 10%)",
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "modified_at": "2024-01-01T00:00:00Z"
+    }
+  }
+]
