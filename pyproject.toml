@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "django-erp"
+version = "0.1.0"
+description = "HR/Payroll Management ERP System"
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+django = "^5.2"
+django-celery-beat = "^2.8"
+django-crispy-forms = "^2.4"
+django-constance = "^4.3"
+django-debug-toolbar = "^6.1"
+django-guardian = "^3.2"
+django-import-export = "^4.3"
+django-simple-history = "^3.10"
+django-money = "^3.5"
+django-unfold = { git = "https://github.com/unfoldadmin/django-unfold.git" }
+django-fsm = "^3.0"
+django-filter = "^25.1"
+whitenoise = "^6.11"
+gunicorn = "^23.0"
+pillow = "^12.0"
+sentry-sdk = { extras = ["django"], version = "^2.43" }
+weasyprint = "^65.0"
+redis = "^6.0"
+
+[tool.ruff]
+fix = true
+line-length = 88
+lint.select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+    "UP", # pyupgrade
+]
+lint.ignore = [
+    "E501", # line too long, handled by black
+    "B008", # do not perform function calls in argument defaults
+    "C901", # too complex
+]
+exclude = ["**/migrations"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
