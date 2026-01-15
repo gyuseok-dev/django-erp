@@ -1,0 +1,62 @@
+# Python
+*.py[cod]
+*$py.class
+*.so
+.Python
+__pycache__/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+/media
+/staticfiles
+/static
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Poetry
+poetry.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+
+# Migrations (선택사항 - 필요시 주석 해제)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# Backup files
+*.bak
+*.tmp
+
+# OS files
+Thumbs.db
